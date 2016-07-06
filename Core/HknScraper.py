@@ -1,6 +1,6 @@
 from lxml import html
 import requests
-from utils import xpath_safe_assignment as safe_assign, ExamItem
+from Core.utils import xpath_safe_assignment as safe_assign, ExamItem
 
 HKN_BASE_CRAWL_URL = "https://hkn.eecs.berkeley.edu" #Contains the Course List
 

@@ -1,4 +1,4 @@
-import HknScraper, TbpScraper
+from Core import HknScraper, TbpScraper
 from itertools import chain
 
 

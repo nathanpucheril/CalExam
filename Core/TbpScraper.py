@@ -1,6 +1,6 @@
 from lxml import html
 import requests
-from utils import xpath_safe_assignment as safe_assign, ExamItem
+from Core.utils import xpath_safe_assignment as safe_assign, ExamItem
 
 TBP_BASE_CRAWL_URL = "https://tbp.berkeley.edu" #Contains the departments
 
