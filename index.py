@@ -44,9 +44,10 @@ def attribution():
 
 
 
-
-
+def interval():
+    update_db()
+    Timer(600, interval).start()
+interval()
 if __name__ == '__main__':
     # app.run(debug=True, port=PORT)
     app.run(host='0.0.0.0', port=PORT)
-    Timer(5, lambda : print(5)).start()
