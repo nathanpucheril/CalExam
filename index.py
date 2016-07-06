@@ -5,9 +5,11 @@ from Core.DB import search_class
 import json
 import ast
 from bson.json_util import loads
+import os
 
 app = Flask(__name__)
 APP_TITLE = "Cal Exam Archive"
+PORT = int(os.environ.get('PORT', 5000))# For Heroku
 
 
 @app.route("/")
@@ -39,4 +41,4 @@ def attribution():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=PORT)
