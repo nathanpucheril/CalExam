@@ -14,10 +14,7 @@ exams = None
 
 
 if DB_URI:
-    client = MongoClient(os.environ.get('MONGODB_URI',
-                                        connectTimeoutMS=30000,
-                                        socketTimeoutMS=None,
-                                        socketKeepAlive=True))
+    client = MongoClient(os.environ.get('MONGODB_URI'))
 else:
     client = MongoClient()
 
