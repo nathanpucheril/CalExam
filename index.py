@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import render_template
 from flask import request
-from CalExam.DB_Search import search_class
+from Core.DB_Search import search_class
 import json
 import ast
 from bson.json_util import loads
