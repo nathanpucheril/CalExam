@@ -25,7 +25,7 @@ print("CLIENT OBJ" + str(client))
 
 
 db = client.get_default_database()
-all_exams = db.all_exams
+all_exams = db.exams
 
 # ################################################################################
 # ##############################      UPDATE      ########################
