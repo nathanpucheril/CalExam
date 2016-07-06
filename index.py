@@ -14,7 +14,6 @@ PORT = int(os.environ.get('PORT', 5000))# For Heroku
 
 @app.route("/")
 def index():
-    print("Routing to index")
     query = request.args.get("search")
     # if query:
     #     query = query.lower()
@@ -44,5 +43,4 @@ def attribution():
 
 if __name__ == '__main__':
     # app.run(debug=True, port=PORT)
-    print("STARTING APP")
     app.run(host='0.0.0.0', port=PORT)

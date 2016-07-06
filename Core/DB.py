@@ -7,15 +7,22 @@ import os
 import Core.ExamScraper
 
 
-
+print()
 DB_URI = os.environ.get('MONGODB_URI',None)
 client = None
 exams = None
+
+
 
 if DB_URI:
     client = MongoClient(os.environ.get('MONGODB_URI'))
 else:
     client = MongoClient()
+
+
+print("INIT DB")
+print("DB URI: " + str(DB_URI))
+print("CLIENT OBJ" + str(client))
 
 
 exams = client.exams
