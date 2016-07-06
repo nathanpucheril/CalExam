@@ -17,9 +17,7 @@ def index():
     query = request.args.get("search")
     if query:
         query = query.lower()
-    results = None
     results = search_class(query)
-    print(results)
 
     title = "{main}{bar}{query}".format(main=APP_TITLE,
                                         query=query if query else "",
@@ -42,4 +40,5 @@ def attribution():
 
 if __name__ == '__main__':
     # app.run(debug=True, port=PORT)
+    print("STARTING APP")
     app.run(host='0.0.0.0', port=PORT)
