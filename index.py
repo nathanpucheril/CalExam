@@ -17,8 +17,8 @@ def index():
     query = request.args.get("search")
     # if query:
     #     query = query.lower()
-    # results = search_class(query)
-    results = ""
+    results = search_class(query)
+    # results = ""
 
     title = "{main}{bar}{query}".format(main=APP_TITLE,
                                         query=query if query else "",
