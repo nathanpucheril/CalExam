@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>
+      Computer Science Courses
+       - Tau Beta Pi, California Alpha Chapter
+    </title>
+
+    <meta name="description" content="Tau Beta Pi Engineering Honor Society, California Alpha Chapter">
+    <meta name="keywords" content="tau beta pi engineering honor society california alpha chapter ca-a ucb berkeley ">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+    <link rel="shortcut icon" href="/static/images/favicon.ico">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="/static/css/6411461b0679.css" type="text/css" />
+
+    
+
+    
+  </head>
+  <body>
+    <div id="wrapper" class="">
+      
+      <header>
+        <div id="header-focus">
+          
+<div id="login">
+  <ul>
+     
+    <li>
+      <a href="/accounts/login/?next=/courses/cs/">
+        <i class="fa fa-sign-in"></i>
+        Log In
+      </a>
+    </li>
+    
+  </ul>
+</div>
+
+
+          <div id="logo-group">
+            <a href="/" id="logo-link"><img src="/static/images/bent_circle.png" id="logo" alt="Bent Logo">
+              <div id="logo-name">Tau Beta Pi</div>
+              <div id="logo-location">UC Berkeley</div></a>
+            <a href="/" id="logo-overlay"></a>
+          </div>
+        </div>
+      </header>
+      
+
+      
+
+<div id="navigation-container">
+  
+  <div id="nav-menubar">
+    <div class="nav-menubar-content">
+      Menu
+      <div class="nav-menubar-icon">
+        <i class="fa fa-bars"></i>
+      </div>
+    </div>
+  </div>
+
+  <nav>
+    <ul><li><a href="/about/" class=" ">About</a><ul><li><a href="/about/contact/" class="">Contact Us</a></li><li><a href="/about/eligibility/" class="">Eligibility</a></li></ul></li><li><a href="https://www.flickr.com/photos/126742707@N03/sets/">Gallery</a><ul><li><a href="https://www.flickr.com/photos/126742707@N03/sets/">Current Gallery</a></li><li><a href="/gallery/">Gallery Archives</a></li></ul></li><li><a href="/officers/" class=" ">People</a><ul><li><a href="/officers/" class="">Officers</a></li><li><a href="/people/committees/" class="">Committees</a></li><li><a href="/past-presidents/" class="">Past Presidents</a></li></ul></li><li><a href="/events/" class="">Events</a><ul><li><a href="/events/">Events List</a></li><li><a href="/events/calendar/" class="">Events Calendar</a></li><li><a href="/events/builder/" class="">Events Scheduler</a></li></ul></li><li><a href="/student-resources/" class=" selected">Student&nbsp;Resources</a><ul><li><a href="/courses/">Exams and Syllabi</a></li><li><a href="/mock-interviews/" >Mock Interviews</a></li><li><a href="/resume-critique/" >Resume Critique</a></li><li><a href="/email/helpdesk/" class = "">Helpdesk</a></li></ul></li><li><a href="/industry/" class="">Industrial&nbsp;Relations</a><ul></ul></li></ul>
+  </nav>
+</div>
+
+      
+
+      <div id="container">
+        <div id="content" class="">
+        
+<h1>
+  Computer Science Courses
+</h1>
+
+
+        
+
+
+        
+
+
+<p>
+
+
+
+
+
+
+
+
+</p>
+
+
+<h2>Search Courses</h2>
+<div>
+  <input type="search" id="course-search">
+</div>
+
+
+<script>
+var list = []
+
+window.onload = function(){
+  $.getJSON('/courses/list', {}, function(data){
+    list = data
+  });
+  $("#course-search").autocomplete({
+    focus: function(event, ui) {
+      event.preventDefault();
+    },
+    autoFocus: true,
+    select: function(event, ui) {
+      event.preventDefault();
+      var course = ui.item.value;
+      var link = course.toLowerCase().split(" ");
+      window.location = "/courses/" + link[0] + "/" + link[1];
+      ga('send', 'event', 'course', 'search', link[0] + link[1]);
+    },
+    minLength: 1,
+    source: function(req, resp) {
+      if(list.length == 0) {
+        resp(list);
+      } else {
+        var input = req.term.toLowerCase()
+        var output = []
+        for(var i = 0; i<list.length; i++){
+          var course = list[i];
+          var longDepartmentName = course[0];
+          var shortDepartmentName = course[1];
+          var courseNumber = course[2];
+          var queries = [longDepartmentName + " " + courseNumber,
+                         shortDepartmentName + courseNumber,
+                         shortDepartmentName + " " + courseNumber,
+                         courseNumber,
+                         courseNumber + " " + longDepartmentName,
+                         courseNumber + " " + shortDepartmentName];
+          var matched = false;
+          for(var j = 0; j<queries.length; j++){
+            var query = queries[j].toLowerCase()
+            if(query.indexOf(input) == 0){
+              matched = true;
+            }
+          }
+          if(matched){
+            output.push(shortDepartmentName + " " +
+                        courseNumber);
+          }
+        }
+        resp(output);
+      }
+    }
+  });
+}
+</script>
+
+
+
+<h2>Courses</h2>
+<ul>
+  
+  <li>
+    <a href="/courses/cs/3/">CS 3</a>
+    
+    
+  </li>
+  
+  <li>
+    <a href="/courses/cs/10/">CS 10</a>
+    
+    
+  </li>
+  
+  <li>
+    <a href="/courses/cs/61A/">CS 61A</a>
+    
+    
+  </li>
+  
+  <li>
+    <a href="/courses/cs/61B/">CS 61B</a>
+    
+    
+  </li>
+  
+  <li>
+    <a href="/courses/cs/61BL/">CS 61BL</a>
+    
+    
+  </li>
+  
+  <li>
+    <a href="/courses/cs/61C/">CS 61C</a>
+    
+    
+  </li>
+  
+  <li>
+    <a href="/courses/cs/61CL/">CS 61CL</a>
+    
+    
+  </li>
+  
+  <li>
+    <a href="/courses/cs/70/">CS 70</a>
+    
+    
+  </li>
+  
+  <li>
+    <a href="/courses/cs/150/">CS 150</a>
+    
+    
+  </li>
+  
+  <li>
+    <a href="/courses/cs/152/">CS 152</a>
+    
+    
+  </li>
+  
+  <li>
+    <a href="/courses/cs/160/">CS 160</a>
+    
+    
+  </li>
+  
+  <li>
+    <a href="/courses/cs/161/">CS 161</a>
+    
+    
+  </li>
+  
+  <li>
+    <a href="/courses/cs/162/">CS 162</a>
+    
+    
+  </li>
+  
+  <li>
+    <a href="/courses/cs/164/">CS 164</a>
+    
+    
+  </li>
+  
+  <li>
+    <a href="/courses/cs/168/">CS 168</a>
+    
+    
+  </li>
+  
+  <li>
+    <a href="/courses/cs/169/">CS 169</a>
+    
+    
+  </li>
+  
+  <li>
+    <a href="/courses/cs/170/">CS 170</a>
+    
+    
+  </li>
+  
+  <li>
+    <a href="/courses/cs/172/">CS 172</a>
+    
+    
+  </li>
+  
+  <li>
+    <a href="/courses/cs/174/">CS 174</a>
+    
+    
+  </li>
+  
+  <li>
+    <a href="/courses/cs/182/">CS 182</a>
+    
+    
+  </li>
+  
+  <li>
+    <a href="/courses/cs/184/">CS 184</a>
+    
+    
+  </li>
+  
+  <li>
+    <a href="/courses/cs/186/">CS 186</a>
+    
+    
+  </li>
+  
+  <li>
+    <a href="/courses/cs/188/">CS 188</a>
+    
+    
+  </li>
+  
+  <li>
+    <a href="/courses/cs/189/">CS 189</a>
+    
+    
+  </li>
+  
+  <li>
+    <a href="/courses/cs/195/">CS 195</a>
+    
+    
+  </li>
+  
+  <li>
+    <a href="/courses/cs/270/">CS 270</a>
+    
+    
+  </li>
+  
+</ul>
+
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div id="footer-focus">
+      
+        <div id="socialmedia">
+          <a href="https://www.facebook.com/tbpberkeley" title="Facebook" class="sm-facebook">
+            <i class="fa fa-facebook-square sm-facebook"></i>
+          </a>
+        </div>
+        <div id="copyright">
+          <p><a href="/">Home</a> | <a href="/about/contact/">Contact Us</a></p>
+          <p>Copyright &copy; 2008-2016 Tau Beta Pi, California Alpha Chapter</p>
+          <p><a href="http://www.tbp.org/">Tau Beta Pi Nationals</a> | <a href="http://coe.berkeley.edu/">College of Engineering</a></p>
+        </div>
+      
+      </div>
+    </footer>
+
+    <div id="width-test-small"></div>
+    <div id="width-test-small-med"></div>
+    <div id="width-test-medium"></div>
+
+    
+
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script src="/static/js/libs/jquery.ui.touch-punch.min.js"></script>
+<script src="/static/js/libs/jquery.query-object.js"></script>
+<script type="text/javascript">function getCookie(name){var cookieValue=null;if(document.cookie&&document.cookie!=''){var cookies=document.cookie.split(';');for(var i=0;i<cookies.length;i++){var cookie=jQuery.trim(cookies[i]);if(cookie.substring(0,name.length+1)==(name+'=')){cookieValue=decodeURIComponent(cookie.substring(name.length+1));break;}}}
+return cookieValue;}
+var csrftoken=getCookie('csrftoken');function csrfSafeMethod(method){return(/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));}
+$.ajaxSetup({crossDomain:false,beforeSend:function(xhr,settings){if(!csrfSafeMethod(settings.type)){xhr.setRequestHeader("X-CSRFToken",csrftoken);}}});</script>
+
+
+    <script type="text/javascript" src="/static/js/e136202d64e9.js"></script>
+
+    
+
+    
+
+
+
+<script>
+$('.hide-notification').click(function(event) {
+  var $this = $(this);
+  var clearURL = $this.data('clear-url');
+  $.post(clearURL).always($this.parent().fadeOut());
+});
+</script>
+
+
+    
+
+    <!--Page finished rendering Wed, 29 Jun 2016 15:52:56 -0700-->
+  </body>
+</html>

@@ -1,0 +1,3141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>
+      Computer Science 61A
+       - Tau Beta Pi, California Alpha Chapter
+    </title>
+
+    <meta name="description" content="Tau Beta Pi Engineering Honor Society, California Alpha Chapter">
+    <meta name="keywords" content="tau beta pi engineering honor society california alpha chapter ca-a ucb berkeley ">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+    <link rel="shortcut icon" href="/static/images/favicon.ico">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="/static/css/6411461b0679.css" type="text/css" />
+
+    
+
+    
+  </head>
+  <body>
+    <div id="wrapper" class="">
+      
+      <header>
+        <div id="header-focus">
+          
+<div id="login">
+  <ul>
+     
+    <li>
+      <a href="/accounts/login/?next=/courses/cs/61A/">
+        <i class="fa fa-sign-in"></i>
+        Log In
+      </a>
+    </li>
+    
+  </ul>
+</div>
+
+
+          <div id="logo-group">
+            <a href="/" id="logo-link"><img src="/static/images/bent_circle.png" id="logo" alt="Bent Logo">
+              <div id="logo-name">Tau Beta Pi</div>
+              <div id="logo-location">UC Berkeley</div></a>
+            <a href="/" id="logo-overlay"></a>
+          </div>
+        </div>
+      </header>
+      
+
+      
+
+<div id="navigation-container">
+  
+  <div id="nav-menubar">
+    <div class="nav-menubar-content">
+      Menu
+      <div class="nav-menubar-icon">
+        <i class="fa fa-bars"></i>
+      </div>
+    </div>
+  </div>
+
+  <nav>
+    <ul><li><a href="/about/" class=" ">About</a><ul><li><a href="/about/contact/" class="">Contact Us</a></li><li><a href="/about/eligibility/" class="">Eligibility</a></li></ul></li><li><a href="https://www.flickr.com/photos/126742707@N03/sets/">Gallery</a><ul><li><a href="https://www.flickr.com/photos/126742707@N03/sets/">Current Gallery</a></li><li><a href="/gallery/">Gallery Archives</a></li></ul></li><li><a href="/officers/" class=" ">People</a><ul><li><a href="/officers/" class="">Officers</a></li><li><a href="/people/committees/" class="">Committees</a></li><li><a href="/past-presidents/" class="">Past Presidents</a></li></ul></li><li><a href="/events/" class="">Events</a><ul><li><a href="/events/">Events List</a></li><li><a href="/events/calendar/" class="">Events Calendar</a></li><li><a href="/events/builder/" class="">Events Scheduler</a></li></ul></li><li><a href="/student-resources/" class=" selected">Student&nbsp;Resources</a><ul><li><a href="/courses/">Exams and Syllabi</a></li><li><a href="/mock-interviews/" >Mock Interviews</a></li><li><a href="/resume-critique/" >Resume Critique</a></li><li><a href="/email/helpdesk/" class = "">Helpdesk</a></li></ul></li><li><a href="/industry/" class="">Industrial&nbsp;Relations</a><ul></ul></li></ul>
+  </nav>
+</div>
+
+      
+
+      <div id="container">
+        <div id="content" class="">
+        
+<h1>
+  <a href="/courses/cs/">Computer Science</a> 61A
+</h1>
+
+
+
+
+        
+
+
+        
+
+
+<p>
+
+
+
+
+
+
+
+
+</p>
+
+
+<h2>Search Courses</h2>
+<div>
+  <input type="search" id="course-search">
+</div>
+
+
+<script>
+var list = []
+
+window.onload = function(){
+  $.getJSON('/courses/list', {}, function(data){
+    list = data
+  });
+  $("#course-search").autocomplete({
+    focus: function(event, ui) {
+      event.preventDefault();
+    },
+    autoFocus: true,
+    select: function(event, ui) {
+      event.preventDefault();
+      var course = ui.item.value;
+      var link = course.toLowerCase().split(" ");
+      window.location = "/courses/" + link[0] + "/" + link[1];
+      ga('send', 'event', 'course', 'search', link[0] + link[1]);
+    },
+    minLength: 1,
+    source: function(req, resp) {
+      if(list.length == 0) {
+        resp(list);
+      } else {
+        var input = req.term.toLowerCase()
+        var output = []
+        for(var i = 0; i<list.length; i++){
+          var course = list[i];
+          var longDepartmentName = course[0];
+          var shortDepartmentName = course[1];
+          var courseNumber = course[2];
+          var queries = [longDepartmentName + " " + courseNumber,
+                         shortDepartmentName + courseNumber,
+                         shortDepartmentName + " " + courseNumber,
+                         courseNumber,
+                         courseNumber + " " + longDepartmentName,
+                         courseNumber + " " + shortDepartmentName];
+          var matched = false;
+          for(var j = 0; j<queries.length; j++){
+            var query = queries[j].toLowerCase()
+            if(query.indexOf(input) == 0){
+              matched = true;
+            }
+          }
+          if(matched){
+            output.push(shortDepartmentName + " " +
+                        courseNumber);
+          }
+        }
+        resp(output);
+      }
+    }
+  });
+}
+</script>
+
+
+
+<h2>Exams</h2>
+
+
+
+<table class="footable bordered stylized">
+  
+  <thead>
+    <tr>
+      
+      <th data-sort-initial="true">Instructors</th>
+      
+      <th data-hide="phone">Type</th>
+      <th data-type="numeric">Term</th>
+      <th data-hide="phone" data-sort-ignore="true">Exam</th>
+      <th data-hide="phone" data-sort-ignore="true">Solution</th>
+      <th data-hide="phone" data-sort-ignore="true">Flag (E)</th>
+      <th data-hide="phone" data-sort-ignore="true">Flag (S)</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Final</td>
+      <td data-value="19984">Fall 1998</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="harvey-cs61A-fa1998-final-exam"
+            href="/exams/2244/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2244/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/146/">Clancy</a>
+          
+        
+      </td>
+      <td>Midterm 3</td>
+      <td data-value="19952">Spring 1995</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="clancy-cs61A-sp1995-mt3-exam"
+            href="/exams/2260/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2260/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Midterm 1</td>
+      <td data-value="20062">Spring 2006</td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a class="exam-download-link"
+            id="harvey-cs61A-sp2006-mt1-soln"
+            href="/exams/2267/download/">
+            <i class="fa fa-download"></i> Solution</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2267/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/695/">Denero</a>
+          
+        
+      </td>
+      <td>Midterm 1</td>
+      <td data-value="20124">Fall 2012</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="denero-cs61A-fa2012-mt1-exam"
+            href="/exams/4074/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+          <a class="exam-download-link"
+            id="denero-cs61A-fa2012-mt1-soln"
+            href="/exams/4070/download/">
+            <i class="fa fa-download"></i> Solution</a>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/4074/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+          <a href="/exams/4070/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/695/">Denero</a>
+          
+        
+      </td>
+      <td>Final</td>
+      <td data-value="20152">Spring 2015</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="denero-cs61A-sp2015-final-exam"
+            href="/exams/4907/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+          <a class="exam-download-link"
+            id="denero-cs61A-sp2015-final-soln"
+            href="/exams/4908/download/">
+            <i class="fa fa-download"></i> Solution</a>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/4907/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+          <a href="/exams/4908/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/695/">Denero</a>
+          
+        
+      </td>
+      <td>Midterm 2</td>
+      <td data-value="20114">Fall 2011</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="denero-cs61A-fa2011-mt2-exam"
+            href="/exams/4137/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+          <a class="exam-download-link"
+            id="denero-cs61A-fa2011-mt2-soln"
+            href="/exams/3337/download/">
+            <i class="fa fa-download"></i> Solution</a>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/4137/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+          <a href="/exams/3337/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Final</td>
+      <td data-value="19942">Spring 1994</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="harvey-cs61A-sp1994-final-exam"
+            href="/exams/2252/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2252/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/695/">Denero</a>
+          
+        
+      </td>
+      <td>Midterm 2</td>
+      <td data-value="20154">Fall 2015</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="denero-cs61A-fa2015-mt2-exam"
+            href="/exams/4975/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+          <a class="exam-download-link"
+            id="denero-cs61A-fa2015-mt2-soln"
+            href="/exams/4976/download/">
+            <i class="fa fa-download"></i> Solution</a>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/4975/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+          <a href="/exams/4976/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/695/">Denero</a>
+          
+        
+      </td>
+      <td>Midterm 2</td>
+      <td data-value="20152">Spring 2015</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="denero-cs61A-sp2015-mt2-exam"
+            href="/exams/4733/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+          <a class="exam-download-link"
+            id="denero-cs61A-sp2015-mt2-soln"
+            href="/exams/4734/download/">
+            <i class="fa fa-download"></i> Solution</a>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/4733/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+          <a href="/exams/4734/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Midterm 2</td>
+      <td data-value="20062">Spring 2006</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="harvey-cs61A-sp2006-mt2-exam"
+            href="/exams/169/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+          <a class="exam-download-link"
+            id="harvey-cs61A-sp2006-mt2-soln"
+            href="/exams/2282/download/">
+            <i class="fa fa-download"></i> Solution</a>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/169/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2282/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/695/">Denero</a>
+          
+        
+      </td>
+      <td>Midterm 1</td>
+      <td data-value="20152">Spring 2015</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="denero-cs61A-sp2015-mt1-exam"
+            href="/exams/4684/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+          <a class="exam-download-link"
+            id="denero-cs61A-sp2015-mt1-soln"
+            href="/exams/4685/download/">
+            <i class="fa fa-download"></i> Solution</a>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/4684/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+          <a href="/exams/4685/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/1037/">Kamil</a>
+          
+        
+      </td>
+      <td>Midterm 1</td>
+      <td data-value="20132">Spring 2013</td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a class="exam-download-link"
+            id="kamil-cs61A-sp2013-mt1-soln"
+            href="/exams/4072/download/">
+            <i class="fa fa-download"></i> Solution</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/4072/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Midterm 3</td>
+      <td data-value="20104">Fall 2010</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="harvey-cs61A-fa2010-mt3-exam"
+            href="/exams/1755/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/1755/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/695/">Denero</a>
+          
+        
+      </td>
+      <td>Midterm 2</td>
+      <td data-value="20144">Fall 2014</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="denero-cs61A-fa2014-mt2-exam"
+            href="/exams/4507/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+          <a class="exam-download-link"
+            id="denero-cs61A-fa2014-mt2-soln"
+            href="/exams/4698/download/">
+            <i class="fa fa-download"></i> Solution</a>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/4507/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+          <a href="/exams/4698/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Midterm 1</td>
+      <td data-value="20012">Spring 2001</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="harvey-cs61A-sp2001-mt1-exam"
+            href="/exams/2280/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2280/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/695/">Denero</a>
+          
+        
+      </td>
+      <td>Midterm 1</td>
+      <td data-value="20144">Fall 2014</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="denero-cs61A-fa2014-mt1-exam"
+            href="/exams/4565/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+          <a class="exam-download-link"
+            id="denero-cs61A-fa2014-mt1-soln"
+            href="/exams/4566/download/">
+            <i class="fa fa-download"></i> Solution</a>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/4565/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+          <a href="/exams/4566/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Midterm 3</td>
+      <td data-value="19984">Fall 1998</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="harvey-cs61A-fa1998-mt3-exam"
+            href="/exams/2274/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2274/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/763/">Fateman</a>, 
+          
+        
+          
+            <a href="/courses/instructors/764/">Forsyth</a>
+          
+        
+      </td>
+      <td>Midterm 2</td>
+      <td data-value="19982">Spring 1998</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="fateman-forsyth-cs61A-sp1998-mt2-exam"
+            href="/exams/2278/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2278/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+        &mdash;
+        
+      </td>
+      <td>Midterm 2</td>
+      <td data-value="19922">Spring 1992</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="cs61A-sp1992-mt2-exam"
+            href="/exams/2251/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2251/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Midterm 1</td>
+      <td data-value="20014">Fall 2001</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="harvey-cs61A-fa2001-mt1-exam"
+            href="/exams/3209/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/3209/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Midterm 2</td>
+      <td data-value="19984">Fall 1998</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="harvey-cs61A-fa1998-mt2-exam"
+            href="/exams/2246/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2246/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/146/">Clancy</a>
+          
+        
+      </td>
+      <td>Final</td>
+      <td data-value="19952">Spring 1995</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="clancy-cs61A-sp1995-final-exam"
+            href="/exams/2264/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2264/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Midterm 2</td>
+      <td data-value="19942">Spring 1994</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="harvey-cs61A-sp1994-mt2-exam"
+            href="/exams/2275/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2275/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/146/">Clancy</a>
+          
+        
+      </td>
+      <td>Midterm 1</td>
+      <td data-value="19952">Spring 1995</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="clancy-cs61A-sp1995-mt1-exam"
+            href="/exams/2250/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2250/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/695/">Denero</a>
+          
+        
+      </td>
+      <td>Midterm 1</td>
+      <td data-value="20114">Fall 2011</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="denero-cs61A-fa2011-mt1-exam"
+            href="/exams/4136/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+          <a class="exam-download-link"
+            id="denero-cs61A-fa2011-mt1-soln"
+            href="/exams/3336/download/">
+            <i class="fa fa-download"></i> Solution</a>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/4136/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+          <a href="/exams/3336/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Final</td>
+      <td data-value="19974">Fall 1997</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="harvey-cs61A-fa1997-final-exam"
+            href="/exams/2241/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2241/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Midterm 3</td>
+      <td data-value="19944">Fall 1994</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="harvey-cs61A-fa1994-mt3-exam"
+            href="/exams/2254/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2254/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/695/">Denero</a>
+          
+        
+      </td>
+      <td>Midterm 2</td>
+      <td data-value="20124">Fall 2012</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="denero-cs61A-fa2012-mt2-exam"
+            href="/exams/4073/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+          <a class="exam-download-link"
+            id="denero-cs61A-fa2012-mt2-soln"
+            href="/exams/4071/download/">
+            <i class="fa fa-download"></i> Solution</a>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/4073/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+          <a href="/exams/4071/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/1037/">Kamil</a>
+          
+        
+      </td>
+      <td>Midterm 2</td>
+      <td data-value="20132">Spring 2013</td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a class="exam-download-link"
+            id="kamil-cs61A-sp2013-mt2-soln"
+            href="/exams/4087/download/">
+            <i class="fa fa-download"></i> Solution</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/4087/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/149/">Garcia</a>, 
+          
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Midterm 2</td>
+      <td data-value="20012">Spring 2001</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="garcia-harvey-cs61A-sp2001-mt2-exam"
+            href="/exams/2242/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2242/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Midterm 2</td>
+      <td data-value="19962">Spring 1996</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="harvey-cs61A-sp1996-mt2-exam"
+            href="/exams/2270/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2270/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Midterm 2</td>
+      <td data-value="19994">Fall 1999</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="harvey-cs61A-fa1999-mt2-exam"
+            href="/exams/2271/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2271/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/914/">Rowe</a>
+          
+        
+      </td>
+      <td>Midterm 1</td>
+      <td data-value="20024">Fall 2002</td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a class="exam-download-link"
+            id="rowe-cs61A-fa2002-mt1-soln"
+            href="/exams/2262/download/">
+            <i class="fa fa-download"></i> Solution</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2262/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Midterm 3</td>
+      <td data-value="19942">Spring 1994</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="harvey-cs61A-sp1994-mt3-exam"
+            href="/exams/2248/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2248/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Midterm 3</td>
+      <td data-value="19962">Spring 1996</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="harvey-cs61A-sp1996-mt3-exam"
+            href="/exams/2272/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2272/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Midterm 2</td>
+      <td data-value="19992">Spring 1999</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="harvey-cs61A-sp1999-mt2-exam"
+            href="/exams/2279/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2279/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Midterm 2</td>
+      <td data-value="19972">Spring 1997</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="harvey-cs61A-sp1997-mt2-exam"
+            href="/exams/2269/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2269/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/695/">Denero</a>
+          
+        
+      </td>
+      <td>Final</td>
+      <td data-value="20114">Fall 2011</td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a class="exam-download-link"
+            id="denero-cs61A-fa2011-final-soln"
+            href="/exams/3501/download/">
+            <i class="fa fa-download"></i> Solution</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/3501/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/695/">Denero</a>
+          
+        
+      </td>
+      <td>Final</td>
+      <td data-value="20124">Fall 2012</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="denero-cs61A-fa2012-final-exam"
+            href="/exams/4025/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+          <a class="exam-download-link"
+            id="denero-cs61A-fa2012-final-soln"
+            href="/exams/4026/download/">
+            <i class="fa fa-download"></i> Solution</a>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/4025/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+          <a href="/exams/4026/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Midterm 3</td>
+      <td data-value="20062">Spring 2006</td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a class="exam-download-link"
+            id="harvey-cs61A-sp2006-mt3-soln"
+            href="/exams/2259/download/">
+            <i class="fa fa-download"></i> Solution</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2259/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Midterm 1</td>
+      <td data-value="20052">Spring 2005</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="harvey-cs61A-sp2005-mt1-exam"
+            href="/exams/3211/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/3211/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/146/">Clancy</a>
+          
+        
+      </td>
+      <td>Midterm 2</td>
+      <td data-value="19952">Spring 1995</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="clancy-cs61A-sp1995-mt2-exam"
+            href="/exams/2261/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2261/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/914/">Rowe</a>
+          
+        
+      </td>
+      <td>Midterm 2</td>
+      <td data-value="20024">Fall 2002</td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a class="exam-download-link"
+            id="rowe-cs61A-fa2002-mt2-soln"
+            href="/exams/2283/download/">
+            <i class="fa fa-download"></i> Solution</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2283/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+        &mdash;
+        
+      </td>
+      <td>Final</td>
+      <td data-value="19922">Spring 1992</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="cs61A-sp1992-final-exam"
+            href="/exams/2258/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2258/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Midterm 1</td>
+      <td data-value="20102">Spring 2010</td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a class="exam-download-link"
+            id="harvey-cs61A-sp2010-mt1-soln"
+            href="/exams/1656/download/">
+            <i class="fa fa-download"></i> Solution</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/1656/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/695/">Denero</a>
+          
+        
+      </td>
+      <td>Midterm 1</td>
+      <td data-value="20154">Fall 2015</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="denero-cs61A-fa2015-mt1-exam"
+            href="/exams/4926/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+          <a class="exam-download-link"
+            id="denero-cs61A-fa2015-mt1-soln"
+            href="/exams/4927/download/">
+            <i class="fa fa-download"></i> Solution</a>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/4926/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+          <a href="/exams/4927/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Midterm 1</td>
+      <td data-value="19944">Fall 1994</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="harvey-cs61A-fa1994-mt1-exam"
+            href="/exams/2285/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2285/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Final</td>
+      <td data-value="19962">Spring 1996</td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a class="exam-download-link"
+            id="harvey-cs61A-sp1996-final-soln"
+            href="/exams/2255/download/">
+            <i class="fa fa-download"></i> Solution</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2255/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/763/">Fateman</a>, 
+          
+        
+          
+            <a href="/courses/instructors/764/">Forsyth</a>
+          
+        
+      </td>
+      <td>Midterm 3</td>
+      <td data-value="19982">Spring 1998</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="fateman-forsyth-cs61A-sp1998-mt3-exam"
+            href="/exams/2249/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2249/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/915/">Coates</a>
+          
+        
+      </td>
+      <td>Midterm 1</td>
+      <td data-value="20003">Summer 2000</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="coates-cs61A-su2000-mt1-exam"
+            href="/exams/2281/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2281/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/912/">Huang</a>
+          
+        
+      </td>
+      <td>Midterm 2</td>
+      <td data-value="20143">Summer 2014</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="huang-cs61A-su2014-mt2-exam"
+            href="/exams/4630/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+          <a class="exam-download-link"
+            id="huang-cs61A-su2014-mt2-soln"
+            href="/exams/4634/download/">
+            <i class="fa fa-download"></i> Solution</a>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/4630/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+          <a href="/exams/4634/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Midterm 1</td>
+      <td data-value="19942">Spring 1994</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="harvey-cs61A-sp1994-mt1-exam"
+            href="/exams/2265/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2265/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+        &mdash;
+        
+      </td>
+      <td>Midterm 1</td>
+      <td data-value="19922">Spring 1992</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="cs61A-sp1992-mt1-exam"
+            href="/exams/2268/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2268/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Midterm 2</td>
+      <td data-value="19974">Fall 1997</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="harvey-cs61A-fa1997-mt2-exam"
+            href="/exams/2277/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2277/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+        &mdash;
+        
+      </td>
+      <td>Midterm 3</td>
+      <td data-value="19922">Spring 1992</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="cs61A-sp1992-mt3-exam"
+            href="/exams/2266/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2266/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Midterm 2</td>
+      <td data-value="19944">Fall 1994</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="harvey-cs61A-fa1994-mt2-exam"
+            href="/exams/2257/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2257/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Midterm 1</td>
+      <td data-value="19984">Fall 1998</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="harvey-cs61A-fa1998-mt1-exam"
+            href="/exams/2256/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2256/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Midterm 1</td>
+      <td data-value="19994">Fall 1999</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="harvey-cs61A-fa1999-mt1-exam"
+            href="/exams/2253/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2253/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/695/">Denero</a>
+          
+        
+      </td>
+      <td>Final</td>
+      <td data-value="20144">Fall 2014</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="denero-cs61A-fa2014-final-exam"
+            href="/exams/4670/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+          <a class="exam-download-link"
+            id="denero-cs61A-fa2014-final-soln"
+            href="/exams/4671/download/">
+            <i class="fa fa-download"></i> Solution</a>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/4670/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+          <a href="/exams/4671/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/914/">Rowe</a>
+          
+        
+      </td>
+      <td>Midterm 3</td>
+      <td data-value="20024">Fall 2002</td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a class="exam-download-link"
+            id="rowe-cs61A-fa2002-mt3-soln"
+            href="/exams/2243/download/">
+            <i class="fa fa-download"></i> Solution</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2243/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Midterm 1</td>
+      <td data-value="19992">Spring 1999</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="harvey-cs61A-sp1999-mt1-exam"
+            href="/exams/2276/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2276/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/912/">Huang</a>
+          
+        
+      </td>
+      <td>Midterm 1</td>
+      <td data-value="20143">Summer 2014</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="huang-cs61A-su2014-mt1-exam"
+            href="/exams/4629/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+          <a class="exam-download-link"
+            id="huang-cs61A-su2014-mt1-soln"
+            href="/exams/4633/download/">
+            <i class="fa fa-download"></i> Solution</a>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/4629/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+          <a href="/exams/4633/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/695/">Denero</a>
+          
+        
+      </td>
+      <td>Midterm 1</td>
+      <td data-value="20134">Fall 2013</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="denero-cs61A-fa2013-mt1-exam"
+            href="/exams/4170/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+          <a class="exam-download-link"
+            id="denero-cs61A-fa2013-mt1-soln"
+            href="/exams/4171/download/">
+            <i class="fa fa-download"></i> Solution</a>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/4170/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+          <a href="/exams/4171/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Midterm 3</td>
+      <td data-value="19974">Fall 1997</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="harvey-cs61A-fa1997-mt3-exam"
+            href="/exams/2273/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2273/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Midterm 1</td>
+      <td data-value="19972">Spring 1997</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="harvey-cs61A-sp1997-mt1-exam"
+            href="/exams/2284/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2284/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Midterm 1</td>
+      <td data-value="19974">Fall 1997</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="harvey-cs61A-fa1997-mt1-exam"
+            href="/exams/2247/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2247/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Final</td>
+      <td data-value="19944">Fall 1994</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="harvey-cs61A-fa1994-final-exam"
+            href="/exams/2263/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2263/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/695/">Denero</a>
+          
+        
+      </td>
+      <td>Final</td>
+      <td data-value="20134">Fall 2013</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="denero-cs61A-fa2013-final-exam"
+            href="/exams/5127/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+          <a class="exam-download-link"
+            id="denero-cs61A-fa2013-final-soln"
+            href="/exams/5128/download/">
+            <i class="fa fa-download"></i> Solution</a>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/5127/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+          <a href="/exams/5128/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/763/">Fateman</a>, 
+          
+        
+          
+            <a href="/courses/instructors/764/">Forsyth</a>
+          
+        
+      </td>
+      <td>Midterm 1</td>
+      <td data-value="19982">Spring 1998</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="fateman-forsyth-cs61A-sp1998-mt1-exam"
+            href="/exams/148/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/148/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Midterm 1</td>
+      <td data-value="20004">Fall 2000</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="harvey-cs61A-fa2000-mt1-exam"
+            href="/exams/2245/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/2245/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/2/">Harvey</a>
+          
+        
+      </td>
+      <td>Midterm 1</td>
+      <td data-value="20054">Fall 2005</td>
+      <td>
+        
+        <a class="exam-download-link"
+          <a class="exam-download-link"
+            id="harvey-cs61A-fa2005-mt1-exam"
+            href="/exams/3210/download/">
+            <i class="fa fa-download"></i> Exam</a>
+        
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        
+          <a href="/exams/3210/flag/">
+            <i class="fa fa-flag"></i> Flag</a>
+          
+        
+      </td>
+      <td>
+        
+      </td>
+      
+    </tr>
+    
+  </tbody>
+  
+</table>
+
+
+
+<h2>Syllabi</h2>
+
+
+
+<table class="footable bordered stylized">
+  
+  <thead>
+    <tr>
+      
+      <th data-sort-initial="true">Instructors</th>
+      
+      <th data-type="numeric">Term</th>
+      <th data-hide="phone" data-sort-ignore="true">Download</th>
+      <th data-hide="phone" data-sort-ignore="true">Flag</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/695/">Denero</a>
+          
+        
+      </td>
+      <td data-value="20144">Fall 2014</td>
+      <td>
+        <a class="syllabus-download-link"
+          id="denero-cs61A-fa2014"
+          href="/syllabi/64/download/">
+          <i class="fa fa-download"></i> Download</a>
+      </td>
+      <td>
+        <a href="/syllabi/64/flag/">
+          <i class="fa fa-flag"></i> Flag</a>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/695/">Denero</a>
+          
+        
+      </td>
+      <td data-value="20152">Spring 2015</td>
+      <td>
+        <a class="syllabus-download-link"
+          id="denero-cs61A-sp2015"
+          href="/syllabi/80/download/">
+          <i class="fa fa-download"></i> Download</a>
+      </td>
+      <td>
+        <a href="/syllabi/80/flag/">
+          <i class="fa fa-flag"></i> Flag</a>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/695/">Denero</a>
+          
+        
+      </td>
+      <td data-value="20154">Fall 2015</td>
+      <td>
+        <a class="syllabus-download-link"
+          id="denero-cs61A-fa2015"
+          href="/syllabi/186/download/">
+          <i class="fa fa-download"></i> Download</a>
+      </td>
+      <td>
+        <a href="/syllabi/186/flag/">
+          <i class="fa fa-flag"></i> Flag</a>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/912/">Huang</a>, 
+          
+        
+          
+            <a href="/courses/instructors/1116/">Wu</a>
+          
+        
+      </td>
+      <td data-value="20153">Summer 2015</td>
+      <td>
+        <a class="syllabus-download-link"
+          id="huang-wu-cs61A-su2015"
+          href="/syllabi/224/download/">
+          <i class="fa fa-download"></i> Download</a>
+      </td>
+      <td>
+        <a href="/syllabi/224/flag/">
+          <i class="fa fa-flag"></i> Flag</a>
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      
+      <td>
+        
+          
+            <a href="/courses/instructors/155/">Hilfinger</a>
+          
+        
+      </td>
+      <td data-value="20162">Spring 2016</td>
+      <td>
+        <a class="syllabus-download-link"
+          id="hilfinger-cs61A-sp2016"
+          href="/syllabi/342/download/">
+          <i class="fa fa-download"></i> Download</a>
+      </td>
+      <td>
+        <a href="/syllabi/342/flag/">
+          <i class="fa fa-flag"></i> Flag</a>
+        
+      </td>
+      
+    </tr>
+    
+  </tbody>
+  
+</table>
+
+
+
+
+
+
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div id="footer-focus">
+      
+        <div id="socialmedia">
+          <a href="https://www.facebook.com/tbpberkeley" title="Facebook" class="sm-facebook">
+            <i class="fa fa-facebook-square sm-facebook"></i>
+          </a>
+        </div>
+        <div id="copyright">
+          <p><a href="/">Home</a> | <a href="/about/contact/">Contact Us</a></p>
+          <p>Copyright &copy; 2008-2016 Tau Beta Pi, California Alpha Chapter</p>
+          <p><a href="http://www.tbp.org/">Tau Beta Pi Nationals</a> | <a href="http://coe.berkeley.edu/">College of Engineering</a></p>
+        </div>
+      
+      </div>
+    </footer>
+
+    <div id="width-test-small"></div>
+    <div id="width-test-small-med"></div>
+    <div id="width-test-medium"></div>
+
+    
+
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script src="/static/js/libs/jquery.ui.touch-punch.min.js"></script>
+<script src="/static/js/libs/jquery.query-object.js"></script>
+<script type="text/javascript">function getCookie(name){var cookieValue=null;if(document.cookie&&document.cookie!=''){var cookies=document.cookie.split(';');for(var i=0;i<cookies.length;i++){var cookie=jQuery.trim(cookies[i]);if(cookie.substring(0,name.length+1)==(name+'=')){cookieValue=decodeURIComponent(cookie.substring(name.length+1));break;}}}
+return cookieValue;}
+var csrftoken=getCookie('csrftoken');function csrfSafeMethod(method){return(/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));}
+$.ajaxSetup({crossDomain:false,beforeSend:function(xhr,settings){if(!csrfSafeMethod(settings.type)){xhr.setRequestHeader("X-CSRFToken",csrftoken);}}});</script>
+
+
+    <script type="text/javascript" src="/static/js/e136202d64e9.js"></script>
+
+    
+
+    
+
+
+
+<script>
+$('.hide-notification').click(function(event) {
+  var $this = $(this);
+  var clearURL = $this.data('clear-url');
+  $.post(clearURL).always($this.parent().fadeOut());
+});
+</script>
+
+
+    
+
+
+<script src="/static/footable/dist/footable.min.js"></script>
+<script type="text/javascript" src="/static/js/bd4e8358c45f.js"></script>
+
+<script>
+$('.exam-download-link').click(function() {
+  ga('send', 'event', 'exams', 'download', $(this).attr('id'));
+});
+
+$('.syllabus-download-link').click(function() {
+  ga('send', 'event', 'syllabi', 'download', $(this).attr('id'));
+});
+</script>
+
+
+
+    <!--Page finished rendering Wed, 29 Jun 2016 15:53:10 -0700-->
+  </body>
+</html>

@@ -1,0 +1,74 @@
+<div id="results">
+  <table id="results-table">
+    <thead>
+      <th>Professor(s)</th>
+      <th>Exam Type</th>
+      <th>Term</th>
+      <th>Exam Url</th>
+      <th>Solution Url</th>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+
+
+
+<script type="text/javascript">
+  function rowWriter(rowIndex, record, columns, cellWriter) {
+    var tr = '', isLink = false;
+    for (var i = 0, len = columns.length; i < len; i++) {
+      isLink = (i === 3 || i === 4) ? true: false;
+      tr += cellWriter(columns[i], record, isLink);
+    }
+
+    return '<tr>' + tr + '</tr>';
+  };
+
+  function cellWriter(column, record, isLink) {
+    var html = column.attributeWriter(record),
+      td = '<td';
+
+    if (column.hidden || column.textAlign) {
+      td += ' style="';
+
+      // keep cells for hidden column headers hidden
+      if (column.hidden) {
+        td += 'display: none;';
+      }
+
+      // keep cells aligned as their column headers are aligned
+      if (column.textAlign) {
+        td += 'text-align: ' + column.textAlign + ';';
+      }
+
+      td += '"';
+    }
+    var tdContent = isLink ? '<a href="' + html + '"> Open </a>' : html;
+    return td + '>' + tdContent + '</td>';
+  };
+
+
+  $('#results-table').dynatable({
+    writers: {
+      _rowWriter: rowWriter,
+      _cellWriter: cellWriter
+    },
+    features: {
+      paginate: false
+    },
+    dataset: {
+      records: {{results_json | safe}}
+    }
+  });
+  //
+  // function rowWriter(rowIndex, record, columns, cellWriter) {
+  //   var linkOpen = "<a href=", linkClose = "</a>"
+  //   if (rowIndex % 3 === 0) { cssClass += ' first'; }
+  //   li = '<li class="' + cssClass + '"><div class="thumbnail"><div class="thumbnail-image">' + record.thumbnail + '</div><div class="caption">' + record.caption + '</div></div></li>';
+  //   return li;
+  // }
+
+
+  // }
+</script>

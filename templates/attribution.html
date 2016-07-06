@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+<body>
+
+  {% block body %}
+
+    <a href="{{ url_for('index')}}">
+      {% include "logo.html" %}
+    </a>
+
+    <section class="attribution">
+      <div>
+
+        All Sources are propoerty of UC B
+      </div>
+    </section>
+
+    {% include "footer.html" %}
+  {% endblock %}
+
+</body>

@@ -1,0 +1,15 @@
+{% extends "page-overlay-base.html" %}
+{% block overlay_content %}
+<form id="missing-content" action="index.html" method="post">
+  Thank You for reporting a missing exam. We will try to get the issue fixed
+  ASAP.
+  <br><br>
+
+
+  Course: <input type="text" name="course" placeholder="ex. XX 123">
+  Professor: <input type="text" name="professor" placeholder="ex. Professor John DOe">
+  Term: <input type="text" name="term" placeholder="ex. Spring 2012">
+  Exam Type: <input type="text" name="examType" placeholder="ex. Midterm 2">
+  Link: <input type="text" name="locationFound" placeholder="<HKN/TBP LINK>">
+</form>
+{% endblock %}

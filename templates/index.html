@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+<body>
+{% block body %}
+<div id="wrapper">
+{% include "search.html" %}
+<!-- <a href="#results" id="scroll-link"> ↓ </a> -->
+{% include "results.html" %}
+</div>
+{% include "footer.html" %}
+{% include "missing.html" %}
+{% endblock %}
+<script type="text/javascript">
+  function toggleVisible(uiID) {
+    document.getElementById(uiID).style.display === 'none' ? 'inherit' : 'none';
+  }
+
+  function makeInvisible(uiID) {
+    document.getElementById(uiID).style.display = 'none';
+  }
+  function makeVisible(uiID) {
+    document.getElementById(uiID).style.display == 'inherit';
+  }
+
+</script>
+</body>

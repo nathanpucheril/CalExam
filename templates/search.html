@@ -1,0 +1,17 @@
+<section class="search">
+  <div id="search-wrapper">
+    <div id="logo-container">
+      {% include "logo.html"%}
+    </div>
+    <h5 id="slogan"> Easy Access to multiple sources of practice exams and resources!</h5>
+    <form  autocomplete="off" class="search" method="get">
+      <input class="search" id="search-bar "type="text" name="search" placeholder="Search by Course # or Professor">
+      <ul class="search" id="search-suggestions">
+        <li><a href="/?search={{suggestion1}}">{{suggestion1}}</a></li>
+        <li><a href="/?search={{suggestion2}}">{{suggestion2}}</a></li>
+        <li><a href="/?search={{suggestion3}}">{{suggestion3}}</a></li>
+        <li><a href="/?search={{suggestion4}}">{{suggestion4}}</a></li>
+      </ul>
+    </form>
+  </div>
+</section>
