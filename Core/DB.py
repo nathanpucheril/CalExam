@@ -7,13 +7,13 @@ import os
 import Core.ExamScraper
 
 
-DEPLOY = True
 
+DB_URI = os.environ.get('MONGODB_URI',None)
 client = None
 exams = None
 
-if DEPLOY:
-    client = MongoClient(os.environ['MONGODB_URI'])
+if DB_URI:
+    client = MongoClient(os.environ.get('MONGODB_URI'))
 else:
     client = MongoClient()
 
