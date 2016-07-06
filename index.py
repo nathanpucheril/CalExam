@@ -7,6 +7,7 @@ import json
 import ast
 from bson.json_util import loads
 import os
+from threading import Timer
 
 app = Flask(__name__)
 APP_TITLE = "Cal Exam Archive"
@@ -38,12 +39,14 @@ def index():
 
 @app.route("/attribution")
 def attribution():
-
-    update_db()
     return render_template("attribution.html",
                            title="{main} | Attribution".format(main=APP_TITLE))
+
+
+
 
 
 if __name__ == '__main__':
     # app.run(debug=True, port=PORT)
     app.run(host='0.0.0.0', port=PORT)
+    Timer(5, lambda x: print(x)).start()
