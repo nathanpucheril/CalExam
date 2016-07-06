@@ -2,6 +2,7 @@ import pymongo
 from pymongo import MongoClient
 import json
 from bson.json_util import dumps
+import os
 
 import Core.ExamScraper
 
@@ -12,13 +13,12 @@ client = None
 exams = None
 
 if DEPLOY:
-    client = MongoClient(MONGODB_URI)
-    exams = client.EXAMS
+    client = MongoClient(os.environ['MONGODB_URI'])
 else:
     client = MongoClient()
-    exams = client.exams
 
 
+exams = client.exams
 all_exams = exams.all_exams
 
 # ################################################################################
