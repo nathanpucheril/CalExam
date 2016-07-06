@@ -15,14 +15,17 @@ PORT = int(os.environ.get('PORT', 5000))# For Heroku
 @app.route("/")
 def index():
     print("Routing to index")
-    query = request.args.get("search")
-    if query:
-        query = query.lower()
-    results = search_class(query)
+    # query = request.args.get("search")
+    # if query:
+    #     query = query.lower()
+    # results = search_class(query)
+    results = ""
 
     title = "{main}{bar}{query}".format(main=APP_TITLE,
                                         query=query if query else "",
                                         bar=" | " if query else "")
+
+    print("Render Index")
     return render_template("index.html",
                            title=title,
                            suggestion1="CS 61A",
