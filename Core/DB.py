@@ -6,16 +6,20 @@ from bson.json_util import dumps
 import Core.ExamScraper
 
 
-DEPLOY = False
+DEPLOY = True
+
+client = None
+exams = None
 
 if DEPLOY:
-    client = None
+    client = MongoClient(MONGODB_URI)
+    exams = client.EXAMS
 else:
     client = MongoClient()
+    exams = client.exams
 
 
-exam_db = client.exam_db
-all_exams = exam_db.all_exams
+all_exams = exams.all_exams
 
 # ################################################################################
 # ##############################      UPDATE      ################################
