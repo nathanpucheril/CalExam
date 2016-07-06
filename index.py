@@ -15,7 +15,6 @@ PORT = int(os.environ.get('PORT', 5000))# For Heroku
 
 @app.route("/")
 def index():
-    update_db()
     query = request.args.get("search")
     if query:
         query = query.lower()
@@ -46,3 +45,4 @@ def attribution():
 if __name__ == '__main__':
     # app.run(debug=True, port=PORT)
     app.run(host='0.0.0.0', port=PORT)
+    update_db()
