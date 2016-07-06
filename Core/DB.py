@@ -33,6 +33,7 @@ all_exams = db.all_exams
 
 
 def update_db():
+    print("Within Function")
     exam_data = ExamScraper.scrape()
 
     for i, course_page in enumerate(exam_data):
