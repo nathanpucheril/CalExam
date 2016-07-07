@@ -14,7 +14,7 @@
       </ul> -->
       <input list="courses" name="search" placeholder="Search for a Course (ex. `Math 53`)">
     <datalist id="courses">
-      {% for item in all_course %}
+      {% for item in all_courses %}
         <option value="{{ item }}">
       {% endfor %}
     </datalist>
