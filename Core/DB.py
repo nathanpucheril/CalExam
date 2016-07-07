@@ -34,7 +34,8 @@ all_exams = db.exams
 
 def update_db():
     print("-> Updating Database")
-    print("---> Deleted: " + str(db.exams.delete_many({}).deleted_count))
+    print("---> Deleting Old Database")
+    print("-----> Deleted: " + str(db.exams.delete_many({}).deleted_count))
 
     exam_data = scrape()
     print("---> Scraping Generators")
