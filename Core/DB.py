@@ -20,9 +20,9 @@ else:
     db = client.exams
 
 
-print("INIT DB")
-print("DB URI: " + str(DB_URI))
-print("CLIENT OBJ" + str(client))
+print("-> INIT DB")
+print("---> DB URI: " + str(DB_URI))
+print()
 
 
 all_exams = db.exams
@@ -33,14 +33,15 @@ all_exams = db.exams
 
 
 def update_db():
-    print("Within Function")
-    exam_data = scrape()
-    print("Scrape Generators")
+    print("-> Updating Database")
+    print("---> Deleted: " + str(db.exams.delete_many({}).deleted_count))
 
+    exam_data = scrape()
+    print("---> Scraping Generators")
     for i, course_page in enumerate(exam_data):
         toAdd = [exam_item.getDict() for exam_item in course_page]
         if toAdd:
-            print(str(len(toAdd)) + " entries added to class " +
+            print("-----> " + str(len(toAdd)) + " entries added to class " +
                   toAdd[0]['course'])
             all_exams.insert_many(toAdd)
 
@@ -50,6 +51,7 @@ def update_db():
 
 
 def search_class(query):
+    print("-> Searching for Class: " + str(query))
     return dumps(list(all_exams.find({"course": query})))
 
 #

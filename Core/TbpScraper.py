@@ -52,5 +52,4 @@ def scrape_course_page(dept, course, course_url):
         # print(ExamItem(dept, course, prof, year, exam_type, exam_url, sol_url).getDict())
         yield ExamItem(dept, course, prof, year, exam_type, exam_url, sol_url)
 
-# print(list(scrape_course_page("CS 61A", "")))
-# scrape_course_page(1,1,1)
+# print(list(scrape_course_page("CS 61A", "")))]
