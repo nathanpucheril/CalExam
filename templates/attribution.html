@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% block head %}
+<link rel= "stylesheet" type= "text/css" href="{{ url_for('static',filename='styles/attribution.css') }}">
+{% endblock %}
 
 <body>
 
@@ -9,9 +12,12 @@
     </a>
 
     <section class="attribution">
-      <div>
+      <div id="attribution-div">
+        All resources found on this website are propoerty of their respective creators (UC Berkely, Professors, Students).
 
-        All Sources are propoerty of UC B
+        If you are a professor, university or content-creator of something on our website and
+        want a resource taken down, please know none of the content is hosted on this website but
+        collected from various other sources. Contact us for relevent information.
       </div>
     </section>
 

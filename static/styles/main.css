@@ -12,6 +12,7 @@ html {
 }
 body {
   background-color: rgb(4, 30, 66);
+  color: white;
   font-family: 'Open Sans', sans-serif;
   /*width: 100%;*/
   margin: 0;
