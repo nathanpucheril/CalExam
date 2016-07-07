@@ -46,12 +46,16 @@ def update_db():
             all_exams.insert_many(toAdd)
 
 # ################################################################################
-# ##############################      SEARCH##     #######################
+# ##############################      SEARCH      ################################
 # ################################################################################
 
 
 def search_class(query):
     print("-> Searching for Class: " + str(query))
     return dumps(list(all_exams.find({"course": query})))
+
+def get_courses():
+    # print(dumps(list(all_exams.find({}))))
+    return list(all_exams.find({}).distinct("course"))
 
 #

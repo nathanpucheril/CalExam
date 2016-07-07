@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import render_template
 from flask import request
-from Core.DB import search_class
+from Core.DB import search_class, get_courses
 from Core.DB import update_db
 import json
 import ast
@@ -16,11 +16,15 @@ PORT = int(os.environ.get('PORT', 5000))# For Heroku
 
 @app.route("/")
 def index():
+
+    courses = get_courses()
+
     query = request.args.get("search")
+    course = None
     if query:
+        course = query.upper()
         query = query.lower()
     results = search_class(query)
-    # results = ""
 
     title = "{main}{bar}{query}".format(main=APP_TITLE,
                                         query=query if query else "",
@@ -29,11 +33,9 @@ def index():
     print("Render Index")
     return render_template("index.html",
                            title=title,
-                           suggestion1="CS 61A",
-                           suggestion2="Math 53",
-                           suggestion3="Physics 7A",
-                           suggestion4="EE 20",
-                           results_json=results
+                           results_json=results,
+                           all_courses=courses,
+                           query=course
                            )
 
 

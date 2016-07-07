@@ -8,7 +8,19 @@
       <span>|</span>
       <a href="{{ url_for('attribution') }}">Attribution</a>
       <span>|</span>
-      <a href="missing.html">Missing Exams?</a>
+      <a onclick="displayOn('missing')" >Missing Exams?</a>
+      <script type="text/javascript">
+        function displayOn(id) {
+          var elem = document.getElementById(id)
+          elem.style.display = 'inherit';
+
+        }
+        function displayOff(id) {
+          var elem = document.getElementById(id)
+          elem.style.display = 'none';
+
+        }
+      </script>
     </nav>
   </footer>
 </div>

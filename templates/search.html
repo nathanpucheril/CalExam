@@ -4,14 +4,20 @@
       {% include "logo.html"%}
     </div>
     <h5 id="slogan"> Easy Access to multiple sources of practice exams and resources!</h5>
-    <form  autocomplete="off" class="search" method="get">
-      <input class="search" id="search-bar "type="text" name="search" placeholder="Search by Course # or Professor">
+    <form  onsubmit="document.getElementById('results').scrollIntoView()"autocomplete="off" class="search" method="get">
+      <!-- <input class="search" id="search-bar "type="text" name="search" placeholder="Search by Course # or Professor">
       <ul class="search" id="search-suggestions">
         <li><a href="/?search={{suggestion1}}">{{suggestion1}}</a></li>
         <li><a href="/?search={{suggestion2}}">{{suggestion2}}</a></li>
         <li><a href="/?search={{suggestion3}}">{{suggestion3}}</a></li>
         <li><a href="/?search={{suggestion4}}">{{suggestion4}}</a></li>
-      </ul>
+      </ul> -->
+      <input list="courses" name="search" placeholder="Search for a Course (ex. `Math 53`)">
+    <datalist id="courses">
+      {% for item in all_course %}
+        <option value="{{ item }}">
+      {% endfor %}
+    </datalist>
     </form>
   </div>
 </section>
